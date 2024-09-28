@@ -28,7 +28,7 @@ public class BookingService {
         // HTTP Client
         HttpClient client = HttpClient
                 .newBuilder()
-                .connectTimeout(Duration.ofMillis(1000))
+                .connectTimeout(Duration.ofMillis(10000))
                 .build();
 
 
