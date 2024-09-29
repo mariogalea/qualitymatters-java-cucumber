@@ -20,7 +20,6 @@ public class StepDefinitions {
     @When("the user retrieves booking list")
     public void theUserRetrievesBookingList() /*throws IOException, InterruptedException */{
 
-        //HttpResponse<String> bookingsList = service.getBookings();
 
     }
 

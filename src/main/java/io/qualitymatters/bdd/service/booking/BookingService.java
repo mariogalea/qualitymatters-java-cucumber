@@ -1,9 +1,8 @@
 package io.qualitymatters.bdd.service.booking;
 
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,11 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-
-/*
-
- */
-
+import java.util.ArrayList;
 
 public class BookingService {
 
@@ -43,13 +38,33 @@ public class BookingService {
 
         // Response - Store Response
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // Print it out for debugging purposes
         System.out.printf("Status %s \n", response.statusCode());
         System.out.printf("Response %s \n", response.body());
 
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+        // Store the response in an object = deserialize JSON string into a Java object.
+        // endpoint returns an array of BookingIds  ex:
+        /*
+            [
+              {
+                "bookingid": 231
+              },
+              {
+                "bookingid": 614
+              },
+              {
+                "bookingid": 508
+              },
+              {
+                "bookingid": 473
+              }
+           ]
+         */
 
 
+
+        https://www.jsonschema2pojo.org/
 
         return response;
 
@@ -57,3 +72,15 @@ public class BookingService {
     }
 
 }
+
+class Root{
+    @JsonProperty("bookingid")
+    private int bookingid;
+
+
+    public int getBookingid() {
+        return this.bookingid; }
+    public void setBookingid(int bookingid) {
+        this.bookingid = bookingid; }
+}
+
