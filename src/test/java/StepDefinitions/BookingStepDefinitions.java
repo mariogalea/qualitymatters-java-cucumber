@@ -9,6 +9,12 @@ import java.util.List;
 
 public class BookingStepDefinitions {
 
+    private Context context;
+
+    public BookingStepDefinitions(Context context) {
+        this.context = context;
+    }
+
     BookingService bookingService = new BookingService();
 
     @Given("a bookings list is available")
@@ -20,15 +26,12 @@ public class BookingStepDefinitions {
     @When("the user retrieves booking list")
     public void theUserRetrievesBookingList() throws IOException, InterruptedException {
 
-        List<BookingId> bookingIds = bookingService.getBookings();
+        context.bookingIds = bookingService.getBookings();
 
     }
 
     @When("the user retrieves booking id {int}")
     public void theUserRetrievesBookingId(int id) {
-
-        //https://grapeup.com/blog/dependency-injection-in-cucumber-jvm/#
-        // Dependncy Inject the bookinIds to assert that there are ids available.
 
 
     }
@@ -36,6 +39,12 @@ public class BookingStepDefinitions {
     @Then("the user should have a list of all bookings")
     public void theUserShouldHaveAListOfAllBookings() throws IOException, InterruptedException {
 
+        // Dependency Inject the bookingIds to assert that there are ids available.
+        List<BookingId> bookingIds = context.bookingIds;
+
+        for (BookingId i : bookingIds) {
+            System.out.printf("Booking Id =  %s \n", i.getBookingid());
+        }
 
     }
 

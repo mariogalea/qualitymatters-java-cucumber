@@ -32,9 +32,11 @@ public class BookingService {
         BookingId[] bookingIds = mapper.readValue(response.body(), BookingId[].class);
         // Convert Array to an ArrayList for further object mods.
         List<BookingId> bookingIdsList = new ArrayList<>(Arrays.asList(bookingIds));
+        /*
         for(BookingId i : bookingIdsList) {
             System.out.printf("Booking Id =  %s \n", i.getBookingid());
         }
+        */
 
         return bookingIdsList;
 
