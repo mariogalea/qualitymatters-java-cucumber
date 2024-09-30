@@ -27,6 +27,8 @@ public class BookingStepDefinitions {
     @When("the user retrieves booking id {int}")
     public void theUserRetrievesBookingId(int id) {
 
+        //https://grapeup.com/blog/dependency-injection-in-cucumber-jvm/#
+        // Dependncy Inject the bookinIds to assert that there are ids available.
 
 
     }
