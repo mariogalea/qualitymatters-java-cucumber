@@ -1,7 +1,6 @@
 package io.qualitymatters.bdd.service.booking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class BookingService {
 
@@ -62,9 +60,15 @@ public class BookingService {
            ]
          */
 
+        ObjectMapper mapper = new ObjectMapper();
+        BookingId[] marketData = mapper.readValue(response.body(), BookingId[].class);
 
+        for(BookingId i : marketData) {
 
-        https://www.jsonschema2pojo.org/
+            System.out.printf("Booking Id =  %s \n", i.getBookingid());
+
+        }
+
 
         return response;
 
@@ -73,14 +77,19 @@ public class BookingService {
 
 }
 
-class Root{
-    @JsonProperty("bookingid")
-    private int bookingid;
 
+// https://www.jsonschema2pojo.org/
+class BookingId {
+
+    @JsonProperty("bookingid")
+    private int bookingId;
 
     public int getBookingid() {
-        return this.bookingid; }
-    public void setBookingid(int bookingid) {
-        this.bookingid = bookingid; }
+        return this.bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
 }
 
