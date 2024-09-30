@@ -2,7 +2,7 @@ package io.qualitymatters.bdd.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-// https://www.jsonschema2pojo.org/
+//https://json2csharp.com/code-converters/json-to-pojo
 /*
     [
       {

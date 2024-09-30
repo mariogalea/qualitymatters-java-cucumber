@@ -21,6 +21,7 @@ public class BookingStepDefinitions {
     @Given("a bookings list is available")
     public void aBookingsListIsAvailable() throws IOException, InterruptedException {
 
+        context.bookingIds = bookingService.getBookings();
 
     }
 
@@ -37,6 +38,12 @@ public class BookingStepDefinitions {
 
     }
 
+    @When("the user retrieves booking by id")
+    public void theUserRetrievesBookingById() {
+
+
+    }
+
     @Then("the user should have a list of all bookings")
     public void theUserShouldHaveAListOfAllBookings() throws IOException, InterruptedException {
 
@@ -48,11 +55,18 @@ public class BookingStepDefinitions {
         */
         Assertions.assertFalse(bookingIds.isEmpty());
 
-
     }
 
     @Then("the user should have booking id {int}")
     public void theUserShouldHaveBookingId(int id) {
 
     }
+
+    @Then("the user should have the specified booking")
+    public void theUserShouldHaveTheSpecifiedBooking() {
+    }
+
+
+
+
 }
