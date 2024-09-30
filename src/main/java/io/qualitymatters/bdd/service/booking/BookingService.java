@@ -21,9 +21,10 @@ public class BookingService {
         String uri = "https://restful-booker.herokuapp.com/booking";
         HttpResponse<String> response = RequestHelper.executeGetRequest(uri);
 
-        // Print it out for debugging purposes
+        /* Print out for debugging purposes
         System.out.printf("Status %s \n", response.statusCode());
         System.out.printf("Response %s \n", response.body());
+        */
 
         ObjectMapper mapper = new ObjectMapper();
 

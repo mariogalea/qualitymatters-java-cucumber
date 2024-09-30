@@ -1,4 +1,4 @@
-package booking;
+package StepDefinitions;
 
 import io.cucumber.java.en.*;
 import io.qualitymatters.bdd.pojo.BookingId;
@@ -7,7 +7,7 @@ import io.qualitymatters.bdd.service.booking.BookingService;
 import java.io.IOException;
 import java.util.List;
 
-public class StepDefinitions {
+public class BookingStepDefinitions {
 
     BookingService bookingService = new BookingService();
 
@@ -21,7 +21,6 @@ public class StepDefinitions {
     public void theUserRetrievesBookingList() throws IOException, InterruptedException {
 
         List<BookingId> bookingIds = bookingService.getBookings();
-
 
     }
 
