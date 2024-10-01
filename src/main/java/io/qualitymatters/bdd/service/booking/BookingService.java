@@ -31,15 +31,50 @@ public class BookingService {
         // Deserialization - JSON Response converted into Java Object
         BookingId[] bookingIds = mapper.readValue(response.body(), BookingId[].class);
         // Convert Array to an ArrayList for further object mods.
-        List<BookingId> bookingIdsList = new ArrayList<>(Arrays.asList(bookingIds));
+
         /*
         for(BookingId i : bookingIdsList) {
             System.out.printf("Booking Id =  %s \n", i.getBookingid());
         }
         */
 
-        return bookingIdsList;
+        return new ArrayList<>(Arrays.asList(bookingIds));
 
+    }
+
+    public void getBookingByARandomId() throws IOException, InterruptedException {
+
+
+        List<BookingId> bookingIds = getBookings();
+
+        int selectedBookingId = 0;
+        
+        for(int i=0; i < bookingIds.size(); i++)
+        {
+            selectedBookingId = bookingIds.get(3).getBookingid();
+        }
+
+        String bookingIdAsString = String.valueOf(selectedBookingId);
+
+        System.out.printf(bookingIdAsString);
+
+
+        String uri = "https://restful-booker.herokuapp.com/booking/" + bookingIdAsString;
+
+        System.out.printf(uri);
+
+        HttpResponse<String> response = RequestHelper.executeGetRequest(uri);
+
+        System.out.printf("Response %s \n", response.body());
+
+
+        //ObjectMapper mapper = new ObjectMapper();
+
+        //Booking booking = mapper.readValue(response.body(), Booking.class);
+        //https://hyperskill.org/blog/post/beginners-guide-to-rest-api-testing
+
+
+        //return booking;
     }
 
 }

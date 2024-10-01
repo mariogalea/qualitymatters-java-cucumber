@@ -39,7 +39,10 @@ public class BookingStepDefinitions {
     }
 
     @When("the user retrieves booking by id")
-    public void theUserRetrievesBookingById() {
+    public void theUserRetrievesBookingById() throws IOException, InterruptedException {
+
+        bookingService.getBookingByARandomId();
+
 
 
     }
