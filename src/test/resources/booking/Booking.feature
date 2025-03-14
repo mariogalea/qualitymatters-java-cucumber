@@ -8,17 +8,17 @@ Feature: Booking
     Then the user should have a list of all bookings
 
   Scenario: GET Booking list by id
-    When the user retrieves booking id 100
-    Then the user should have booking id 100
+    When the user retrieves booking id 1
+    Then the user should have booking id 1
 
   Scenario: Delete Booking by id
-    And booking id 100 is available 
-    When the user deletes booking by id 100
-    Then the user should not have booking id 100
+    And booking id 1 is available 
+    When the user deletes booking by id 1
+    Then the user should not have booking id 1
 
   Scenario: Update Booking by id
-    When the user updates booking id 100
-    Then the user should have an updated booking id 100
+    When the user updates booking id 1
+    Then the user should have an updated booking id 1
 
   Scenario: Add Booking
     When the user adds a new booking
