@@ -1,8 +1,8 @@
 package StepDefinitions;
 
-import io.qualitymatters.bdd.pojo.BookingId;
-
 import java.util.List;
+
+import io.qualitymatters.bdd.booking.pojo.BookingId;
 
 public class Context {
 

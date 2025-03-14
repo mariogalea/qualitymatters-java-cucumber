@@ -1,8 +1,9 @@
-package io.qualitymatters.bdd.service.booking;
+package io.qualitymatters.bdd.booking.actions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.qualitymatters.bdd.pojo.BookingId;
-import io.qualitymatters.bdd.service.common.RequestHelper;
+
+import io.qualitymatters.bdd.booking.pojo.BookingId;
+import io.qualitymatters.bdd.utilities.RequestHelper;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BookingService {
+public class BookingActions {
 
-    public BookingService() {
+    public BookingActions() {
 
     }
 

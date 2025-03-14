@@ -1,8 +1,9 @@
 package StepDefinitions;
 
 import io.cucumber.java.en.*;
-import io.qualitymatters.bdd.pojo.BookingId;
-import io.qualitymatters.bdd.service.booking.BookingService;
+import io.qualitymatters.bdd.booking.actions.BookingActions;
+import io.qualitymatters.bdd.booking.pojo.BookingId;
+
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class BookingStepDefinitions {
         this.context = context;
     }
 
-    BookingService bookingService = new BookingService();
+    BookingActions bookingService = new BookingActions();
 
     @Given("a bookings list is available")
     public void aBookingsListIsAvailable() throws IOException, InterruptedException {

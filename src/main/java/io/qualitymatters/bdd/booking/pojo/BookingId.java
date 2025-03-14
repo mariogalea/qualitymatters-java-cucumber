@@ -1,4 +1,4 @@
-package io.qualitymatters.bdd.pojo;
+package io.qualitymatters.bdd.booking.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package io.qualitymatters.bdd.service.common;
+package io.qualitymatters.bdd.utilities;
 
 import java.io.IOException;
 import java.net.URI;
