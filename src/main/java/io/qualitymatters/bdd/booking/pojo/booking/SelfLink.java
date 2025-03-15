@@ -8,7 +8,11 @@ public class SelfLink{
 
     @JsonProperty("href") 
     public String getHref() { 
-		 return this.href; } 
+		 return this.href; 
+    }
+
     public void setHref(String href) { 
-		 this.href = href; } 
+		 this.href = href; 
+    }
+     
 }
