@@ -1,17 +1,18 @@
-package io.qualitymatters.bdd.booking.pojo.booking;
+package io.qualitymatters.bdd.booking.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BookingsLink{
+public class SelfLink{
 
     private String href;
 
     @JsonProperty("href") 
     public String getHref() { 
-		 return this.href; 
-    } 
-    
+        return this.href; 
+    }
+
     public void setHref(String href) { 
-		 this.href = href; 
-    } 
+        this.href = href; 
+    }
+
 }

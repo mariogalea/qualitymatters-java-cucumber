@@ -1,4 +1,4 @@
-package io.qualitymatters.bdd.booking.pojo.booking;
+package io.qualitymatters.bdd.booking.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,37 +11,37 @@ public class Booking{
 
     @JsonProperty("id") 
     public int getId() { 
-		 return this.id;
+	    return this.id;
     }
 
     public void setId(int id) { 
-		 this.id = id; 
+	    this.id = id; 
     }
 
     @JsonProperty("firstName") 
     public String getFirstName() { 
-		 return this.firstName; 
+	    return this.firstName; 
     }
 
     public void setFirstName(String firstName) { 
-		 this.firstName = firstName; 
+	    this.firstName = firstName; 
     }
 
     @JsonProperty("lastName") 
     public String getLastName() { 
-		 return this.lastName; 
+	    return this.lastName; 
     }
 
     public void setLastName(String lastName) { 
-		 this.lastName = lastName; 
+	    this.lastName = lastName; 
     }
 
     @JsonProperty("_links") 
     public Links get_links() { 
-		 return this._links; 
+	    return this._links; 
     }
 
     public void set_links(Links _links) { 
-		 this._links = _links; 
+	    this._links = _links; 
     } 
 }

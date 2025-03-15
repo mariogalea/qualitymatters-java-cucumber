@@ -2,8 +2,6 @@ package StepDefinitions;
 
 import io.cucumber.java.en.*;
 import io.qualitymatters.bdd.booking.actions.BookingActions;
-
-
 import java.io.IOException;
 
 public class BookingStepDefinitions {
@@ -64,7 +62,7 @@ public class BookingStepDefinitions {
     }
     
     @Then("the user should have a list of all bookings")
-    public void the_user_should_have_a_list_of_all_bookings() throws IOException, InterruptedException {
+    public void the_user_should_have_a_list_of_all_bookings() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }

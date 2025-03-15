@@ -1,8 +1,8 @@
-package io.qualitymatters.bdd.booking.pojo.booking;
+package io.qualitymatters.bdd.booking.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Links{
+public class Links {
 
     private SelfLink selfLink;
     private BookingsLink bookingsLink;
@@ -18,9 +18,11 @@ public class Links{
 
     @JsonProperty("bookingsLink") 
     public BookingsLink getBookingsLink() { 
-		 return this.bookingsLink; 
+	    return this.bookingsLink; 
     } 
+
     public void setBookingsLink(BookingsLink bookingsLink) { 
-		 this.bookingsLink = bookingsLink; } 
+	    this.bookingsLink = bookingsLink; 
+    } 
 
 }
