@@ -2,15 +2,13 @@ package StepDefinitions;
 
 import io.cucumber.java.en.*;
 import io.qualitymatters.bdd.booking.actions.BookingActions;
-import io.qualitymatters.bdd.booking.pojo.BookingId;
 
-import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
-import java.util.List;
 
 public class BookingStepDefinitions {
 
+    @SuppressWarnings("unused")
     private final Context context;
 
     public BookingStepDefinitions(Context context) {
@@ -21,18 +19,20 @@ public class BookingStepDefinitions {
 
     @Given("a bookings list is available")
     public void a_booking_list_is_available() throws IOException, InterruptedException {
-        context.bookingIds = bookingActions.getBookings();
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();    
     }
 
     @When("the user retrieves booking list")
     public void the_user_retrieves_booking_list() throws IOException, InterruptedException {
-        context.bookingIds = bookingActions.getBookings();
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();    
     }
 
     @When("the user retrieves booking id {int}")
     public void the_user_retrieves_booking_id(int id) throws IOException, InterruptedException {
-        bookingActions.getBookingByARandomId();
-    }
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();    }
 
     @When("the user updates booking id {int}")
     public void the_user_updates_booking_id(int id) {
@@ -65,8 +65,8 @@ public class BookingStepDefinitions {
     
     @Then("the user should have a list of all bookings")
     public void the_user_should_have_a_list_of_all_bookings() throws IOException, InterruptedException {
-        List<BookingId> bookingIds = context.bookingIds;
-        Assertions.assertFalse(bookingIds.isEmpty());
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
     }
 
     @Then("the user should have booking id {int}")
@@ -90,6 +90,5 @@ public class BookingStepDefinitions {
     public void the_user_should_have_an_updated_booking_list() {
         // Write code here that turns the phrase above into concrete actions
     }
-
 
 }
