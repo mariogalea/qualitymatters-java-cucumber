@@ -89,4 +89,9 @@ public class BookingStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
     }
 
+    @Then("the user should have that booking list in less than {int} ms")
+    public void the_user_should_have_that_booking_list_in_less_than_ms(int i) {
+        // Write code here that turns the phrase above into concrete actions
+    }
+
 }

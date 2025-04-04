@@ -24,3 +24,7 @@ Feature: Booking
     When the user adds a new booking
     And the user retrieves booking list
     Then the user should have an updated booking list
+
+  Scenario: Measure Booking Response Time
+    When the user retrieves booking list
+    Then the user should have that booking list in less than 200 ms
