@@ -32,7 +32,9 @@ public class BookingStepDefinitions {
     @When("the user retrieves booking id {int}")
     public void the_user_retrieves_booking_id(int id) throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();    }
+        // throw new io.cucumber.java.PendingException();  
+        bookingActions.getBookingById(id);
+    }
 
     @When("the user updates booking id {int}")
     public void the_user_updates_booking_id(int id) {
@@ -41,22 +43,25 @@ public class BookingStepDefinitions {
     }
 
     @When("the user deletes booking by id {int}")
-        public void the_user_deletes_booking_by_id(int id) {
+        public void the_user_deletes_booking_by_id(int id) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        // throw new io.cucumber.java.PendingException();
+        bookingActions.deleteBookingById(id);
     }
     
     @When("the user adds a new booking")
     public void the_user_adds_a_new_booking() throws IOException {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
-        bookingActions.postBooking();
-        
+        bookingActions.addBooking();
     }
 
     @When("booking id {int} is available")
-    public void booking_id_is_available(int id) {
+    public void booking_id_is_available(int id) throws IOException {
         // Write code here that turns the phrase above into concrete actions
+        // throw new io.cucumber.java.PendingException();    
+        bookingActions.getBookingById(id);
+
     }
 
     @Then("the user should have an updated booking id {int}")

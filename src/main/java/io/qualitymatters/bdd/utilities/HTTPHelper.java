@@ -2,8 +2,6 @@ package io.qualitymatters.bdd.utilities;
 
 import java.io.IOException;
 
-import org.json.JSONObject;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,10 +11,9 @@ import okhttp3.Response;
 public class HTTPHelper {
 
     private static final OkHttpClient client = new OkHttpClient();
-    private static final String BASE_URL = "http://localhost:8080/bookings";
     private static final MediaType JSON = MediaType.get("application/json");
 
-    public static String get() throws IOException {
+    public static String get(String BASE_URL) throws IOException {
 
         Request request = new Request.Builder()
             .url(BASE_URL)
@@ -27,16 +24,11 @@ public class HTTPHelper {
         }
     }
 
-    public static String post(JSONObject jsonObject) throws IOException {
-
-        jsonObject = new JSONObject();
-        String jsonBody = jsonObject.toString();
-
-        System.out.println(jsonBody);
+    public static String post(String BASE_URL, String jsonBody) throws IOException {
 
         RequestBody body = RequestBody.create(jsonBody, JSON);
         Request request = new Request.Builder()
-            .url(BASE_URL + "/new")
+            .url(BASE_URL)
             .post(body)
             .build();
 
@@ -45,4 +37,27 @@ public class HTTPHelper {
         }
     }
 
-}
+    public static String put(String BASE_URL, String jsonBody) throws IOException {
+
+        RequestBody body = RequestBody.create(jsonBody, JSON);
+        Request request = new Request.Builder()
+            .url(BASE_URL)
+            .put(body)
+            .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }
+    public static String delete(String BASE_URL) throws IOException {
+
+            Request request = new Request.Builder()
+                .url(BASE_URL)
+                .delete()
+                .build();
+    
+            try (Response response = client.newCall(request).execute()) {
+                return response.body().string();
+            }
+        }
+    }
