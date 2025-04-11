@@ -36,6 +36,7 @@ src\test\java
 ├── StepDefinitions
 
 src\test\resources\booking
+├── Booking.feature
 ```
 
 
