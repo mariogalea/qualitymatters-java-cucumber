@@ -18,13 +18,15 @@ public class BookingStepDefinitions {
     @Given("a bookings list is available")
     public void a_booking_list_is_available() throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();    
+        //throw new io.cucumber.java.PendingException();    
+        bookingActions.getBookings();
     }
 
     @When("the user retrieves booking list")
     public void the_user_retrieves_booking_list() throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();    
+        //throw new io.cucumber.java.PendingException();    
+        bookingActions.getBookings();
     }
 
     @When("the user retrieves booking id {int}")
@@ -45,9 +47,11 @@ public class BookingStepDefinitions {
     }
     
     @When("the user adds a new booking")
-    public void the_user_adds_a_new_booking() {
+    public void the_user_adds_a_new_booking() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        //throw new io.cucumber.java.PendingException();
+        bookingActions.postBooking();
+        
     }
 
     @When("booking id {int} is available")
