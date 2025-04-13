@@ -52,9 +52,9 @@ public class BookingStepDefinitions {
     
     @When("the user adds a new booking")
     public void the_user_adds_a_new_booking() throws IOException {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
+
         bookingActions.addBooking();
+
     }
 
     @When("booking id {int} is available")
