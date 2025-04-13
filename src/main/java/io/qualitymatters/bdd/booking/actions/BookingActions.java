@@ -36,14 +36,12 @@ public class BookingActions {
 
         JSONObject json = new JSONObject();
 
-        json.put("firstName", "Gorgio");
-        json.put("lastName","Armani");
+        json.put("firstName", "Takeshi");
+        json.put("lastName","Kitano");
 
         String responsePost = HTTPHelper.post(BASE_URL + "/new", json.toString());
 
         System.out.println(responsePost);
-
-
 
     }
 
