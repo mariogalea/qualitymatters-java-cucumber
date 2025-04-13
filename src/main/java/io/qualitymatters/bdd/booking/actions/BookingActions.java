@@ -1,10 +1,15 @@
 package io.qualitymatters.bdd.booking.actions;
 
 import java.io.IOException;
+//import java.util.ArrayList;
 
+import io.qualitymatters.bdd.booking.pojo.Booking;
+import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 import io.qualitymatters.bdd.utilities.HTTPHelper;
 
 import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class BookingActions {
@@ -19,7 +24,26 @@ public class BookingActions {
     public void getBookings() throws IOException {
 
         String response = HTTPHelper.get(BASE_URL);
+        //Convert string to JSON Object
+          //JSONObject responseInJSON = new JSONObject(response);
 
+        //Serialization - Convert Response to POJO ie. Bookings (Root NestedBookingPojo)
+        ObjectMapper mapper = new ObjectMapper();
+        NestedBookingPojo bookings = mapper.readValue(response, NestedBookingPojo.class);
+
+        //Test Serialization
+         //ArrayList<Booking> fetchedBookings = bookings.get_embedded().getBookingList();
+        for(Booking booking : bookings.get_embedded().getBookingList()){
+
+            System.out.println(booking.getId());
+            System.out.println(booking.getFirstName());
+            System.out.println(booking.getLastName());
+            System.out.println("-------------------------------");
+
+        }
+        
+        System.out.println(bookings.get_embedded().getBookingList().get(0).getFirstName());
+        System.out.println("----------------------------------------------------------------------------------------------");
         System.out.println(response);
     
     }

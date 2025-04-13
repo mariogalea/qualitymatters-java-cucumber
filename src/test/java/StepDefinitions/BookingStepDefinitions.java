@@ -9,6 +9,9 @@ public class BookingStepDefinitions {
     @SuppressWarnings("unused")
     private final Context context;
 
+    /*
+     * Dependency incject Context class to share Objects between different Step Definition files.
+     */
     public BookingStepDefinitions(Context context) {
         this.context = context;
     }
@@ -16,21 +19,21 @@ public class BookingStepDefinitions {
     BookingActions bookingActions = new BookingActions();
 
     @Given("a bookings list is available")
-    public void a_booking_list_is_available() throws IOException, InterruptedException {
+    public void a_booking_list_is_available() throws IOException {
   
         bookingActions.getBookings();
 
     }
 
     @When("the user retrieves booking list")
-    public void the_user_retrieves_booking_list() throws IOException, InterruptedException {
+    public void the_user_retrieves_booking_list() throws IOException {
 
         bookingActions.getBookings();
 
     }
 
     @When("the user retrieves booking id {int}")
-    public void the_user_retrieves_booking_id(int id) throws IOException, InterruptedException {
+    public void the_user_retrieves_booking_id(int id) throws IOException {
  
         bookingActions.getBookingById(id);
 
@@ -73,6 +76,8 @@ public class BookingStepDefinitions {
     @Then("the user should have a list of all bookings")
     public void the_user_should_have_a_list_of_all_bookings() {
         // Write code here that turns the phrase above into concrete actions
+        
+
         throw new io.cucumber.java.PendingException();
     }
 

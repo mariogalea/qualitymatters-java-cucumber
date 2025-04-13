@@ -51,13 +51,13 @@ public class HTTPHelper {
     }
     public static String delete(String BASE_URL) throws IOException {
 
-            Request request = new Request.Builder()
-                .url(BASE_URL)
-                .delete()
-                .build();
-    
-            try (Response response = client.newCall(request).execute()) {
-                return response.body().string();
-            }
+        Request request = new Request.Builder()
+            .url(BASE_URL)
+            .delete()
+            .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
         }
     }
