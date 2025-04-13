@@ -17,36 +17,37 @@ public class BookingStepDefinitions {
 
     @Given("a bookings list is available")
     public void a_booking_list_is_available() throws IOException, InterruptedException {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();    
+  
         bookingActions.getBookings();
+
     }
 
     @When("the user retrieves booking list")
     public void the_user_retrieves_booking_list() throws IOException, InterruptedException {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();    
+
         bookingActions.getBookings();
+
     }
 
     @When("the user retrieves booking id {int}")
     public void the_user_retrieves_booking_id(int id) throws IOException, InterruptedException {
-        // Write code here that turns the phrase above into concrete actions
-        // throw new io.cucumber.java.PendingException();  
+ 
         bookingActions.getBookingById(id);
+
     }
 
     @When("the user updates booking id {int}")
-    public void the_user_updates_booking_id(int id) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_updates_booking_id(int id) throws IOException {
+
+        bookingActions.updateBookingById(id);
+
     }
 
     @When("the user deletes booking by id {int}")
-        public void the_user_deletes_booking_by_id(int id) throws IOException {
-        // Write code here that turns the phrase above into concrete actions
-        // throw new io.cucumber.java.PendingException();
+    public void the_user_deletes_booking_by_id(int id) throws IOException {
+
         bookingActions.deleteBookingById(id);
+
     }
     
     @When("the user adds a new booking")
@@ -58,8 +59,7 @@ public class BookingStepDefinitions {
 
     @When("booking id {int} is available")
     public void booking_id_is_available(int id) throws IOException {
-        // Write code here that turns the phrase above into concrete actions
-        // throw new io.cucumber.java.PendingException();    
+  
         bookingActions.getBookingById(id);
 
     }

@@ -46,14 +46,13 @@ public class BookingActions {
     }
 
     public void updateBookingById(int id) throws IOException {
-
         
         JSONObject json = new JSONObject();
 
-        json.put("firstName", "Gorgio");
-        json.put("lastName","Armani");
+        json.put("firstName", "UpdatedFirstName");
+        json.put("lastName","UpdatedLastName");
 
-        String responsePost = HTTPHelper.put(BASE_URL + "/update/", json.toString());
+        String responsePost = HTTPHelper.put(BASE_URL + "/update/" + id, json.toString());
 
         System.out.println(responsePost);
 
