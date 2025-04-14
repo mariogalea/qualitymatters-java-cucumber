@@ -88,9 +88,7 @@ public class BookingActions {
     
     public void deleteBookingById(int id) throws IOException {
 
-        String response = HTTPHelper.delete(BASE_URL + "/delete/" + id);
-
-        System.out.println(response);
+        HTTPHelper.delete(BASE_URL + "/delete/" + id);
 
     }
 
