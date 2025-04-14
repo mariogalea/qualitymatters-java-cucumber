@@ -79,12 +79,6 @@ public class BookingStepDefinitions {
         booking = bookingActions.getBookingById(id);
 
     }
-
-    @Then("the user should have an updated booking id {int}")
-    public void the_user_should_have_an_updated_booking(int id) {
-
-
-    }
     
     @Then("the user should have a list of all bookings")
     public void the_user_should_have_a_list_of_all_bookings() {
@@ -120,11 +114,16 @@ public class BookingStepDefinitions {
 
     @Then("the user should have an updated booking list")
     public void the_user_should_have_an_updated_booking_list() {
-        // Write code here that turns the phrase above into concrete actions
     }
 
     @Then("the user should have that booking list in less than {int} ms")
     public void the_user_should_have_that_booking_list_in_less_than_ms(int i) {
+        // Write code here that turns the phrase above into concrete actions
+    }
+
+    
+    @Then("the user should have an updated booking id {int}")
+    public void the_user_should_have_an_updated_booking(int id) {
         // Write code here that turns the phrase above into concrete actions
     }
 
