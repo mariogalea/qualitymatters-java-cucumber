@@ -100,12 +100,6 @@ public class BookingStepDefinitions {
 
     }
 
-    @Then("the user should have the specified booking")
-    public void the_user_should_have_the_speficied_booking() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
     @Then("the user should not have booking id {int}")
     public void the_user_should_not_have_booking_id(int id) throws IOException {
 
