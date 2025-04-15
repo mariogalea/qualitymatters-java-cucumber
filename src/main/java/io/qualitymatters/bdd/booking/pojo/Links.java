@@ -13,7 +13,7 @@ public class Links {
     }
 
     public void setSelfLink(SelfLink selfLink) { 
-		this.selfLink = selfLink; 
+		  this.selfLink = selfLink; 
     }
 
     @JsonProperty("bookingsLink") 
