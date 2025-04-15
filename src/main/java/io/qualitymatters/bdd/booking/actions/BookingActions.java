@@ -56,12 +56,14 @@ public class BookingActions {
 
     }
 
-    public Booking addBooking() throws IOException{
+    public Booking addBooking(JSONObject json) throws IOException{
 
+        /* 
         JSONObject json = new JSONObject();
 
         json.put("firstName", "Takeshi");
         json.put("lastName","Kitano");
+        */
 
         String response = HTTPHelper.post(BASE_URL + "/new", json.toString());
 
@@ -71,13 +73,14 @@ public class BookingActions {
 
     }
 
-    public Booking updateBookingById(int id) throws IOException {
+    public Booking updateBookingById(int id, JSONObject json) throws IOException {
         
+        /* 
         JSONObject json = new JSONObject();
 
         json.put("firstName", "UpdatedFirstName");
         json.put("lastName","UpdatedLastName");
-
+        */
         String response = HTTPHelper.put(BASE_URL + "/update/" + id, json.toString());
 
         Booking booking = mapper.readValue(response, Booking.class);

@@ -7,6 +7,7 @@ import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 
 import java.io.IOException;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 
 public class BookingStepDefinitions {
@@ -53,7 +54,13 @@ public class BookingStepDefinitions {
     public void the_user_updates_booking_id(int id) throws IOException {
 
         booking = bookingActions.getBookingById(id);
-        updatedBooking = bookingActions.updateBookingById(id);
+
+        JSONObject json = new JSONObject();
+
+        json.put("firstName", "updatedFirstName");
+        json.put("lastName","updatedLastName");
+
+        updatedBooking = bookingActions.updateBookingById(id, json);
 
         Assertions.assertFalse(booking.equals(updatedBooking));
 
@@ -72,8 +79,14 @@ public class BookingStepDefinitions {
         //Snapshot of Bookings pre add
         bookings = bookingActions.getBookings();
 
+        JSONObject json = new JSONObject();
+
+        json.put("firstName", "Takeshi");
+        json.put("lastName","Kitano");
+
         //Add Bookings
-        bookingActions.addBooking();
+        bookingActions.addBooking(json);
+
         updatedBookings = bookingActions.getBookings();
 
     }
