@@ -15,15 +15,14 @@ Feature: Booking
     When the user updates booking id 4
     Then the user should have an updated booking id 4
 
+  Scenario: Add Booking
+    When the user adds a new booking
+    Then the user should have an updated booking list
+
   Scenario: Delete Booking by id
     And booking id 5 is available 
     When the user deletes booking by id 5
     Then the user should not have booking id 5
-
-  Scenario: Add Booking
-    When the user adds a new booking
-    And the user retrieves booking list
-    Then the user should have an updated booking list
 
   Scenario: Measure Booking Response Time
     When the user retrieves booking list

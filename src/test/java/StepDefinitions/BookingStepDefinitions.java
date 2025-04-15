@@ -15,11 +15,11 @@ public class BookingStepDefinitions {
     private final Context context;
     
     NestedBookingPojo bookings; 
+    NestedBookingPojo updatedBookings;
     Booking booking;
     Booking updatedBooking;
 
     BookingActions bookingActions = new BookingActions();
-
 
     /*
      * Dependency inject Context class to share Objects between different Step Definition files.
@@ -39,7 +39,7 @@ public class BookingStepDefinitions {
     public void the_user_retrieves_booking_list() throws IOException {
 
         bookings = bookingActions.getBookings();
-
+  
     }
 
     @When("the user retrieves booking id {int}")
@@ -69,7 +69,12 @@ public class BookingStepDefinitions {
     @When("the user adds a new booking")
     public void the_user_adds_a_new_booking() throws IOException {
 
+        //Snapshot of Bookings pre add
+        bookings = bookingActions.getBookings();
+
+        //Add Bookings
         bookingActions.addBooking();
+        updatedBookings = bookingActions.getBookings();
 
     }
 
@@ -113,7 +118,15 @@ public class BookingStepDefinitions {
     }
 
     @Then("the user should have an updated booking list")
-    public void the_user_should_have_an_updated_booking_list() {
+    public void the_user_should_have_an_updated_booking_list() throws IOException {
+
+        //Update Bookings post Adding 
+        updatedBookings = bookingActions.getBookings();
+
+        int updatedBookingListSize = updatedBookings.get_embedded().getBookingList().size();
+
+        Assertions.assertTrue(updatedBookingListSize == bookings.get_embedded().getBookingList().size() + 1);
+
     }
 
     @Then("the user should have that booking list in less than {int} ms")
