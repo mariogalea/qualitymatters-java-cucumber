@@ -1,32 +1,46 @@
 package StepDefinitions;
 
+import org.json.JSONObject;
+
 import io.qualitymatters.bdd.booking.pojo.Booking;
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 
-public  class Context {
+public class Context {
 
-    private Booking booking;
-    private NestedBookingPojo bookings;
+    private static Booking booking;
+    private static NestedBookingPojo bookings;
+    private static JSONObject JSON;
 
     public Booking getBooking(){
         
-        return this.booking;
+        return booking;
     }
 
     public void setBooking(Booking booking) {
 
-        this.booking = booking;
+        Context.booking = booking;
     }
 
     public NestedBookingPojo getBookings() {
 
-        return this.bookings;
+        return bookings;
     }
 
     public void setBookings(NestedBookingPojo bookings) {
 
-        this.bookings = bookings;
+        Context.bookings = bookings;
     }
 
+    public JSONObject getJSON(){
+
+        return JSON;
+
+    }
+
+    public void setJSON(JSONObject JSON) {
+
+        Context.JSON = JSON;
+
+    }
 
 }

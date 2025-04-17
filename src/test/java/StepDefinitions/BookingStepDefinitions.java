@@ -12,18 +12,13 @@ import org.junit.jupiter.api.Assertions;
 
 public class BookingStepDefinitions {
 
-    @SuppressWarnings("unused")
     private final Context context;
     
-    NestedBookingPojo bookings; 
-    NestedBookingPojo updatedBookings;
-    Booking booking;
-    Booking updatedBooking;
 
     BookingActions bookingActions = new BookingActions();
 
     /*
-     * Dependency inject Context class to share Objects between different Step Definition files.
+     * Dependency inject Context class to share Objects between different Steps within the same and different Step Definition files.
      */
     public BookingStepDefinitions(Context context) {
         this.context = context;
@@ -32,37 +27,37 @@ public class BookingStepDefinitions {
     @Given("a bookings list is available")
     public void a_booking_list_is_available() throws IOException {
   
-        bookings =  bookingActions.getBookings();
+        context.setBookings(bookingActions.getBookings());
 
     }
 
     @When("the user retrieves booking list")
     public void the_user_retrieves_booking_list() throws IOException {
 
-        bookings = bookingActions.getBookings();
+        context.setBookings(bookingActions.getBookings());
   
     }
 
     @When("the user retrieves booking id {int}")
     public void the_user_retrieves_booking_id(int id) throws IOException {
- 
-        booking = bookingActions.getBookingById(id);
+
+        context.setBooking(bookingActions.getBookingById(id));
 
     }
 
     @When("the user updates booking id {int}")
     public void the_user_updates_booking_id(int id) throws IOException {
 
-        booking = bookingActions.getBookingById(id);
-
         JSONObject json = new JSONObject();
 
-        json.put("firstName", "updatedFirstName");
-        json.put("lastName","updatedLastName");
+        json.put("firstName", "Robert");
+        json.put("lastName","Plant");
 
-        updatedBooking = bookingActions.updateBookingById(id, json);
+        context.setJSON(json);
 
-        Assertions.assertFalse(booking.equals(updatedBooking));
+        Booking updatedBooking = bookingActions.updateBookingById(id, json);
+
+        context.setBooking(updatedBooking);
 
     }
 
@@ -70,36 +65,37 @@ public class BookingStepDefinitions {
     public void the_user_deletes_booking_by_id(int id) throws IOException {
 
         bookingActions.deleteBookingById(id);
+        context.setBookings(bookingActions.getBookings());
 
     }
     
     @When("the user adds a new booking")
     public void the_user_adds_a_new_booking() throws IOException {
 
-        //Snapshot of Bookings pre add
-        bookings = bookingActions.getBookings();
-
         JSONObject json = new JSONObject();
 
         json.put("firstName", "Takeshi");
         json.put("lastName","Kitano");
 
-        //Add Bookings
-        bookingActions.addBooking(json);
+        context.setJSON(json);
 
-        updatedBookings = bookingActions.getBookings();
+        Booking addedBooking = bookingActions.addBooking(json);
 
+        context.setBooking(addedBooking);
     }
 
     @When("booking id {int} is available")
     public void booking_id_is_available(int id) throws IOException {
   
-        booking = bookingActions.getBookingById(id);
+        Booking booking = bookingActions.getBookingById(id);
+        context.setBooking(booking);
 
     }
     
     @Then("the user should have a list of all bookings")
     public void the_user_should_have_a_list_of_all_bookings() {
+
+        NestedBookingPojo bookings = context.getBookings();
 
         Assertions.assertFalse(bookings.get_embedded().getBookingList().isEmpty());
 
@@ -108,6 +104,8 @@ public class BookingStepDefinitions {
     @Then("the user should have booking id {int}")
     public void the_user_should_have_booking_id(int id) {
 
+        Booking booking = context.getBooking();
+
         Assertions.assertTrue(booking.getId() == 3);
 
     }
@@ -115,8 +113,7 @@ public class BookingStepDefinitions {
     @Then("the user should not have booking id {int}")
     public void the_user_should_not_have_booking_id(int id) throws IOException {
 
-        //Update Bookings post delete
-        bookings = bookingActions.getBookings();
+        NestedBookingPojo bookings = context.getBookings();
         
         boolean isFound = false; 
 
@@ -133,12 +130,22 @@ public class BookingStepDefinitions {
     @Then("the user should have an updated booking list")
     public void the_user_should_have_an_updated_booking_list() throws IOException {
 
-        //Update Bookings post Adding 
-        updatedBookings = bookingActions.getBookings();
+        NestedBookingPojo bookings = bookingActions.getBookings();
+        JSONObject addedJsonObject = context.getJSON();
 
-        int updatedBookingListSize = updatedBookings.get_embedded().getBookingList().size();
+        boolean isAdded = false;
+        String firstName = addedJsonObject.getString("firstName");
+        String lastName = addedJsonObject.getString("lastName");
 
-        Assertions.assertTrue(updatedBookingListSize == bookings.get_embedded().getBookingList().size() + 1);
+        for(Booking booking : bookings.get_embedded().getBookingList()) {
+
+            if(booking.getFirstName() == firstName && booking.getLastName() == lastName) {
+                isAdded = true;
+            }
+
+        }
+
+        Assertions.assertFalse(isAdded);
 
     }
 
@@ -150,7 +157,14 @@ public class BookingStepDefinitions {
     
     @Then("the user should have an updated booking id {int}")
     public void the_user_should_have_an_updated_booking(int id) {
-        // Write code here that turns the phrase above into concrete actions
+
+        Booking updatedBooking = context.getBooking();
+        JSONObject json = context.getJSON();
+
+        Assertions.assertTrue(json.getInt("id") == updatedBooking.getId());
+        Assertions.assertTrue(json.getString("firstName") == updatedBooking.getFirstName());
+        Assertions.assertTrue(json.getString("lastName") == updatedBooking.getLastName());
+
     }
 
 }
