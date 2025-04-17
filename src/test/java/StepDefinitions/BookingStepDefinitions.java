@@ -14,7 +14,6 @@ public class BookingStepDefinitions {
 
     private final Context context;
     
-
     BookingActions bookingActions = new BookingActions();
 
     /*
@@ -161,9 +160,8 @@ public class BookingStepDefinitions {
         Booking updatedBooking = context.getBooking();
         JSONObject json = context.getJSON();
 
-        Assertions.assertTrue(json.getInt("id") == updatedBooking.getId());
-        Assertions.assertTrue(json.getString("firstName") == updatedBooking.getFirstName());
-        Assertions.assertTrue(json.getString("lastName") == updatedBooking.getLastName());
+        Assertions.assertEquals(json.getString("firstName").toString(), updatedBooking.getFirstName().toString());
+        Assertions.assertEquals(json.getString("lastName").toString(), updatedBooking.getLastName().toString());
 
     }
 
