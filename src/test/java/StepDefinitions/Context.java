@@ -10,6 +10,7 @@ public class Context {
     private static Booking booking;
     private static NestedBookingPojo bookings;
     private static JSONObject JSON;
+    private static long responseTime;
 
     public Booking getBooking(){
         
@@ -41,6 +42,17 @@ public class Context {
 
         Context.JSON = JSON;
 
+    }
+
+    public void setResponseTime(long responsetTime) {
+
+        Context.responseTime = responsetTime;
+
+    }
+
+    public long getResponseTime() {
+
+        return responseTime;
     }
 
 }

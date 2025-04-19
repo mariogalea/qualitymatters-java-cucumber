@@ -49,6 +49,7 @@ public class HTTPHelper {
             return response.body().string();
         }
     }
+
     public static String delete(String BASE_URL) throws IOException {
 
         Request request = new Request.Builder()
@@ -59,5 +60,24 @@ public class HTTPHelper {
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
-        }
     }
+
+    public static void logResponseTime(String BASE_URL) throws IOException {
+
+        OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor())
+            .build();
+
+        Request request = new Request.Builder()
+            .url(BASE_URL)
+            .header("User-Agent", "Booking Endpoint")
+            .build();
+
+        Response response = client.newCall(request).execute();
+
+        response.body().close();
+
+    }
+
+
+}

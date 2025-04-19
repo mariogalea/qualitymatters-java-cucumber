@@ -149,10 +149,13 @@ public class BookingStepDefinitions {
     }
 
     @Then("the user should have that booking list in less than {int} ms")
-    public void the_user_should_have_that_booking_list_in_less_than_ms(int i) {
-        // Write code here that turns the phrase above into concrete actions
-    }
+    public void the_user_should_have_that_booking_list_in_less_than_ms(int responseTime) throws IOException {
 
+        long responseTimeCaptured = context.getResponseTime();
+
+        Assertions.assertTrue(responseTimeCaptured < responseTime);
+
+    }
     
     @Then("the user should have an updated booking id {int}")
     public void the_user_should_have_an_updated_booking(int id) {
@@ -164,5 +167,15 @@ public class BookingStepDefinitions {
         Assertions.assertEquals(json.getString("lastName").toString(), updatedBooking.getLastName().toString());
 
     }
+
+    @When("the responseTime is captured")
+    public void the_responseTime_is_captured() {
+
+        long responsetTimeCaptured = bookingActions.captureResponseTime();
+
+        context.setResponseTime(responsetTimeCaptured);
+    }
+
+
 
 }

@@ -26,4 +26,5 @@ Feature: Booking
 
   Scenario: Measure Booking Response Time
     When the user retrieves booking list
-    Then the user should have that booking list in less than 200 ms
+    And the responseTime is captured
+    Then the user should have that booking list in less than 10 ms
