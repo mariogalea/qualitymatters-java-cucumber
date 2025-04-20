@@ -176,6 +176,10 @@ public class BookingStepDefinitions {
         context.setResponseTime(responsetTimeCaptured);
     }
 
+    @When("the user updates booking id {int} with the following")
+    public void the_user_updates_booking_id_with_the_following(int i) {
+        // Write code here that turns the phrase above into concrete actions
+    }
 
 
 }
