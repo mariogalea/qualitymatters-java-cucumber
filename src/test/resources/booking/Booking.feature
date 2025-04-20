@@ -54,3 +54,9 @@ Feature: Booking
     When the user retrieves booking list
     And the responseTime is captured
     Then the user should have that booking list in less than 10 ms
+
+  @security
+  Scenario: Add a new booking overriding an exisiting overriding
+    When the user retrieves booking list
+    And the user tries to add a booking by overriding an existing overriding an exisiting overriding
+    Then the user should have error HTTP Error 409 Conflict 
