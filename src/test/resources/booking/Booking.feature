@@ -59,4 +59,4 @@ Feature: Booking
   Scenario: Add a new booking overriding an exisiting overriding
     When the user retrieves booking list
     And the user tries to add a booking by overriding an existing overriding an exisiting overriding
-    Then the user should have error HTTP Error 409 Conflict 
+    Then the user should have HTTP Error 400 Bad Request

@@ -181,15 +181,14 @@ public class BookingStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
     }
 
-    @Then("the user should have error HTTP Error {int} Conflict")
-    public void the_user_should_have_error_HTTP_Error_Conflict(int i) {
-        // Write code here that turns the phrase above into concrete actions
-    }
-
     @When("the user tries to add a booking by overriding an existing overriding an exisiting overriding")
     public void the_user_tries_to_add_a_booking_by_overriding_an_existing_overriding_an_exisiting_overriding() {
         // Write code here that turns the phrase above into concrete actions
     }
 
+    @Then("the user should have HTTP Error {int} Bad Request")
+    public void the_user_should_have_HTTP_Error_Bad_Request(int i) {
+        // Write code here that turns the phrase above into concrete actions
+    }
 
 }
