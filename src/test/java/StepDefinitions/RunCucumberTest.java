@@ -14,7 +14,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @SelectPackages("booking")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "StepDefinitions")
-@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@newContext")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@performance")
 
 public class RunCucumberTest {
 

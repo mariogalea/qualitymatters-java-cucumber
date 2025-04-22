@@ -15,7 +15,6 @@ public class Context {
     private static JSONObject JSON;
     private static long responseTime;
 
-
     // Much Neater Approach from using Static, and specific objects.  More scalable.
     private final Map<String, Object> data = new HashMap<>();
 

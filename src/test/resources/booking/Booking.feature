@@ -5,7 +5,6 @@ Feature: Booking
     Given a bookings list is available
   
   @functional
-  @newContext
   Scenario: GET Booking list
     When the user retrieves booking list
     Then the user should have a list of all bookings
@@ -45,6 +44,7 @@ Feature: Booking
     |Peter    |Grant   |
   
   @functional
+  @reboot
   Scenario: Delete Booking by id
     And booking id 5 is available 
     When the user deletes booking by id 5

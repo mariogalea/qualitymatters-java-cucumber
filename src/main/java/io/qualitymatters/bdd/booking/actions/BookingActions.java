@@ -121,22 +121,22 @@ public class BookingActions {
              duration = System.currentTimeMillis() - startTime;
 
             if (!response.isSuccessful()) {
-                System.out.println("Request failed with code: " + response.code());
+                System.out.println("  > Request failed with code: " + response.code());
             } else {
-                System.out.println("Request successful!");
+                System.out.println("  > Request successful!");
             }
 
-            System.out.println("Response time: " + duration + "ms");
+            System.out.println("  > Response time: " + duration + "ms");
             if (duration > 1000) {
-                System.out.println("Response time exceeded 1 second!");
+                System.out.println("  > Response time exceeded 1 second!");
             } else {
-                System.out.println("Response time is within limit.");
+                System.out.println("  > Response time is within limit.");
             }
 
         } catch (IOException e) {
             duration = System.currentTimeMillis() - startTime;
-            System.out.println("Request failed: " + e.getMessage());
-            System.out.println("Response time before failure: " + duration + "ms");
+            System.out.println("  > Request failed: " + e.getMessage());
+            System.out.println("  > Response time before failure: " + duration + "ms");
         }
 
         return duration;
