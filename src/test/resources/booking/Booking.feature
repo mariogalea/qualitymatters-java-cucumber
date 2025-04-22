@@ -5,6 +5,7 @@ Feature: Booking
     Given a bookings list is available
   
   @functional
+  @newContext
   Scenario: GET Booking list
     When the user retrieves booking list
     Then the user should have a list of all bookings
@@ -21,10 +22,10 @@ Feature: Booking
   
   @functional
   Scenario: Update Booking by id
-    When the user updates booking id 5 with the following
-    |firstName|lastName|
-    |Jimmy    |Page    |
-    Then the user should have an updated booking id 5
+    When the user updates booking with the following
+    |id|firstName|lastName|
+    |5 |Jimmy    |Page    |
+    Then the user should have an updated booking
   
   @functional
   Scenario: Add Booking
@@ -32,8 +33,8 @@ Feature: Booking
     Then the user should have an updated booking list 
 
   @functional
-  Scenario: Add Multiple bookings
-    When the user adds a new booking with first name <firstName> and last name <lastName>
+  Scenario Outline: Add Multiple bookings
+    When the user adds booking with '<firstName>' and '<lastName>'
     Then the user should have an updated booking list
 
     Examples:
@@ -52,11 +53,5 @@ Feature: Booking
   @performance
   Scenario: Measure Booking Response Time
     When the user retrieves booking list
-    And the responseTime is captured
+    And the response time is captured
     Then the user should have that booking list in less than 10 ms
-
-  @security
-  Scenario: Add a new booking overriding an exisiting overriding
-    When the user retrieves booking list
-    And the user tries to add a booking by overriding an existing overriding an exisiting overriding
-    Then the user should have HTTP Error 400 Bad Request

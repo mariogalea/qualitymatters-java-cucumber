@@ -1,14 +1,20 @@
 package StepDefinitions;
 
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.*;
 import io.qualitymatters.bdd.booking.actions.BookingActions;
 import io.qualitymatters.bdd.booking.pojo.Booking;
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
+
+
 
 public class BookingStepDefinitions {
 
@@ -23,10 +29,26 @@ public class BookingStepDefinitions {
         this.context = context;
     }
 
+
+
+    @DataTableType
+    public Booking transformBooking(Map<String, String> entry) {
+
+        Booking booking = new Booking();
+
+        int id = Integer.parseInt(entry.get("id"));
+
+        booking.setId(id);
+        booking.setFirstName(entry.get("firstName"));
+        booking.setLastName(entry.get("lastName"));
+        return booking;
+    }
+
     @Given("a bookings list is available")
     public void a_booking_list_is_available() throws IOException {
   
-        context.setBookings(bookingActions.getBookings());
+        //context.setBookings(bookingActions.getBookings());
+        context.set("bookingList", bookingActions.getBookings());
 
     }
 
@@ -90,11 +112,54 @@ public class BookingStepDefinitions {
         context.setBooking(booking);
 
     }
+
+    @When("the response time is captured")
+    public void the_response_time_is_captured() {
+
+        long responsetTimeCaptured = bookingActions.captureResponseTime();
+
+        context.setResponseTime(responsetTimeCaptured);  
+    }
+
+    // Data Table
+    @When("^the user updates booking with the following$")
+    public void the_user_updates_booking_id_with_the_following(DataTable bookingDetails) throws IOException {
+
+        List<Booking> bookings = bookingDetails.asList(Booking.class);
+        JSONObject json = new JSONObject();
+        Booking updatedBooking = new Booking();
+
+        for (Booking booking : bookings) {
+            json.put("firstName",booking.getFirstName());
+            json.put("lastName",booking.getLastName());
+
+            updatedBooking = bookingActions.updateBookingById(booking.getId(), json);
+        }
+
+        context.setJSON(json);
+        context.setBooking(updatedBooking);
+    }
+
+    @When("the user adds booking with {string} and {string}")
+    public void the_user_adds_booking_with_and(String firstName, String lastName) throws IOException {
+
+        JSONObject json = new JSONObject();
+
+        json.put("firstName", firstName);
+        json.put("lastName", lastName);
+
+        context.setJSON(json);
+
+        Booking addedBooking = bookingActions.addBooking(json);
+
+        context.setBooking(addedBooking);    
+    }
     
     @Then("the user should have a list of all bookings")
     public void the_user_should_have_a_list_of_all_bookings() {
 
-        NestedBookingPojo bookings = context.getBookings();
+        //NestedBookingPojo bookings = context.getBookings();
+        NestedBookingPojo bookings = context.get("bookingList", NestedBookingPojo.class);
 
         Assertions.assertFalse(bookings.get_embedded().getBookingList().isEmpty());
 
@@ -168,27 +233,15 @@ public class BookingStepDefinitions {
 
     }
 
-    @When("the responseTime is captured")
-    public void the_responseTime_is_captured() {
+    @Then("the user should have an updated booking")
+    public void the_user_should_have_an_updated_booking() {
 
-        long responsetTimeCaptured = bookingActions.captureResponseTime();
+        Booking updatedBooking = context.getBooking();
+        JSONObject json = context.getJSON();
 
-        context.setResponseTime(responsetTimeCaptured);
-    }
-
-    @When("the user updates booking id {int} with the following")
-    public void the_user_updates_booking_id_with_the_following(int i) {
-        // Write code here that turns the phrase above into concrete actions
-    }
-
-    @When("the user tries to add a booking by overriding an existing overriding an exisiting overriding")
-    public void the_user_tries_to_add_a_booking_by_overriding_an_existing_overriding_an_exisiting_overriding() {
-        // Write code here that turns the phrase above into concrete actions
-    }
-
-    @Then("the user should have HTTP Error {int} Bad Request")
-    public void the_user_should_have_HTTP_Error_Bad_Request(int i) {
-        // Write code here that turns the phrase above into concrete actions
+        Assertions.assertEquals(json.getString("firstName").toString(), updatedBooking.getFirstName().toString());
+        Assertions.assertEquals(json.getString("lastName").toString(), updatedBooking.getLastName().toString());    
+    
     }
 
 }

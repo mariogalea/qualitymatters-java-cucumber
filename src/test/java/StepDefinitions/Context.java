@@ -1,5 +1,8 @@
 package StepDefinitions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 
 import io.qualitymatters.bdd.booking.pojo.Booking;
@@ -11,6 +14,23 @@ public class Context {
     private static NestedBookingPojo bookings;
     private static JSONObject JSON;
     private static long responseTime;
+
+
+    // Much Neater Approach from using Static, and specific objects.  More scalable.
+    private final Map<String, Object> data = new HashMap<>();
+
+    public void set(String key, Object value) {
+        data.put(key, value);
+    }
+
+    public <T> T get(String key, Class<T> clazz) {
+        return clazz.cast(data.get(key));
+    }
+
+    public boolean contains(String key) {
+        return data.containsKey(key);
+    }
+    // -------------------------------------------------------------------------------
 
     public Booking getBooking(){
         
@@ -32,7 +52,7 @@ public class Context {
         Context.bookings = bookings;
     }
 
-    public JSONObject getJSON(){
+    public JSONObject getJSON() {
 
         return JSON;
 
