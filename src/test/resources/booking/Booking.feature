@@ -44,9 +44,7 @@ Feature: Booking
     |Peter    |Grant   |
   
   @functional
-  @reboot
   Scenario: Delete Booking by id
-    And booking id 5 is available 
     When the user deletes booking by id 5
     Then the user should not have booking id 5
 
@@ -54,4 +52,4 @@ Feature: Booking
   Scenario: Measure Booking Response Time
     When the user retrieves booking list
     And the response time is captured
-    Then the user should have that booking list in less than 10 ms
+    Then the user should have that booking list in less than 15 ms

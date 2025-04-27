@@ -7,20 +7,33 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class HTTPHelper {
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final MediaType JSON = MediaType.get("application/json");
 
-    public static String get(String BASE_URL) throws IOException {
-
+    public static String get(String BASE_URL) {
+        
         Request request = new Request.Builder()
             .url(BASE_URL)
             .build();
-        
+
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected response code: " + response.code() + " - " + response.message());
+            }
+
+            ResponseBody responseBody = response.body();
+            if (responseBody == null) {
+                throw new IOException("Response body is null");
+            }
+
+            return responseBody.string();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to make GET request to " + BASE_URL + ": " + e.getMessage(), e);
         }
     }
 

@@ -101,7 +101,7 @@ public class BookingActions {
 
     }
 
-    public long captureResponseTime() {
+    public Long captureResponseTime() {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.SECONDS)
@@ -113,9 +113,9 @@ public class BookingActions {
                 .url(BASE_URL)
                 .build();
 
-        long startTime = System.currentTimeMillis();
+        Long startTime = System.currentTimeMillis();
 
-        long duration;
+        Long duration;
 
         try (Response response = client.newCall(request).execute()) {
              duration = System.currentTimeMillis() - startTime;
