@@ -77,8 +77,6 @@ public class BookingStepDefinitions {
         json.put("firstName", "Robert");
         json.put("lastName","Plant");
 
-        context.setJSON(json);
-
         context.set("jsonInUpdateBooking",json);
         context.set("updateBookingById",  bookingActions.updateBookingById(id, json));
 
