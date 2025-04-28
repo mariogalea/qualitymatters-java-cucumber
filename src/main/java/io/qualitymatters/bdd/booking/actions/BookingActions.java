@@ -29,73 +29,47 @@ public class BookingActions {
 
     }
 
-    public NestedBookingPojo getBookings() throws IOException {
-
-        String response = HTTPHelper.get(BASE_URL);
-
-        //Serialization - Convert Response to POJO ie. Bookings (Root NestedBookingPojo)
-        NestedBookingPojo bookings = mapper.readValue(response, NestedBookingPojo.class);
-
-        /* Test Serialization
-        ArrayList<Booking> fetchedBookings = bookings.get_embedded().getBookingList();
-        for(Booking booking : fetchedBookings){
-            System.out.println(booking.getId());
-            System.out.println(booking.getFirstName());
-            System.out.println(booking.getLastName());
-            System.out.println("-------------------------------");
+    public NestedBookingPojo getBookings() {
+        try {
+            String response = HTTPHelper.get(BASE_URL);
+            return mapper.readValue(response, NestedBookingPojo.class);
+        } catch (IOException e) {
+            System.err.println("Error deserializing response: " + e.getMessage());
+            throw new RuntimeException("Failed to deserialize bookings data", e);
         }
-        */
-
-
-
-        return bookings;
-      
-    }
-
-    public Booking getBookingById(int id) throws IOException {
-
-        String response = HTTPHelper.get(BASE_URL + "/" + id);
-
-        Booking booking = mapper.readValue(response, Booking.class);
-
-        return booking;
-
-    }
-
-    public Booking addBooking(JSONObject json) throws IOException{
-
-        /* 
-        JSONObject json = new JSONObject();
-
-        json.put("firstName", "Takeshi");
-        json.put("lastName","Kitano");
-        */
-
-        String response = HTTPHelper.post(BASE_URL + "/new", json.toString());
-
-        Booking booking = mapper.readValue(response, Booking.class);
-
-        return booking;
-
-    }
-
-    public Booking updateBookingById(int id, JSONObject json) throws IOException {
-        
-        /* 
-        JSONObject json = new JSONObject();
-
-        json.put("firstName", "UpdatedFirstName");
-        json.put("lastName","UpdatedLastName");
-        */
-        String response = HTTPHelper.put(BASE_URL + "/update/" + id, json.toString());
-
-        Booking booking = mapper.readValue(response, Booking.class);
-
-        return booking;
-
     }
     
-    public void deleteBookingById(int id) throws IOException {
+    public Booking getBookingById(int id) {
+        try {
+            String response = HTTPHelper.get(BASE_URL + "/" + id);
+            return mapper.readValue(response, Booking.class);
+        } catch (IOException e) {
+            System.err.println("Error deserializing response: " + e.getMessage());
+            throw new RuntimeException("Failed to deserialize booking data for ID " + id, e);
+        }
+    }
+    
+    public Booking addBooking(JSONObject json) {
+        try {
+            String response = HTTPHelper.post(BASE_URL + "/new", json.toString());
+            return mapper.readValue(response, Booking.class);
+        } catch (IOException e) {
+            System.err.println("Error deserializing response: " + e.getMessage());
+            throw new RuntimeException("Failed to deserialize new booking data", e);
+        }
+    }
+    
+    public Booking updateBookingById(int id, JSONObject json) {
+        try {
+            String response = HTTPHelper.put(BASE_URL + "/update/" + id, json.toString());
+            return mapper.readValue(response, Booking.class);
+        } catch (IOException e) {
+            System.err.println("Error deserializing response: " + e.getMessage());
+            throw new RuntimeException("Failed to deserialize updated booking data for ID " + id, e);
+        }
+    }
+    
+    public void deleteBookingById(int id) {
 
         HTTPHelper.delete(BASE_URL + "/delete/" + id);
 

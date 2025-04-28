@@ -45,21 +45,13 @@ public class BookingStepDefinitions {
     @Given("a bookings list is available")
     public void a_booking_list_is_available() {
 
-        try {
-            context.set("bookingList", bookingActions.getBookings());
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to fetch bookings list: " + e.getMessage(), e);
-        }
+        context.set("bookingList", bookingActions.getBookings());
 
     }
 
     @When("the user retrieves booking list")
     public void the_user_retrieves_booking_list() {
-        try {
-            context.set("bookingList", bookingActions.getBookings());
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to retrieve booking list: " + e.getMessage(), e);
-        }
+        context.set("bookingList", bookingActions.getBookings());
     }
 
     @When("the user retrieves booking id {int}")
