@@ -10,6 +10,7 @@ import io.qualitymatters.bdd.booking.pojo.Booking;
 //import io.qualitymatters.bdd.booking.pojo.Booking;
 
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
+import io.qualitymatters.bdd.config.Config;
 import io.qualitymatters.bdd.utilities.HTTPHelper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,16 +23,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BookingActions {
 
-    private final String BASE_URL = "http://localhost:8080/bookings";
+    private final String BookingsUrl = "/bookings";
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public BookingActions() {
+    Config config;
 
+    public BookingActions(Config config) {
+        this.config = config;
+    }
+
+    public String getBaseUrl() {
+        return config.getBaseUrl();
     }
 
     public NestedBookingPojo getBookings() {
         try {
-            String response = HTTPHelper.get(BASE_URL);
+            String response = HTTPHelper.get(getBaseUrl() + BookingsUrl);
             return mapper.readValue(response, NestedBookingPojo.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -41,7 +48,7 @@ public class BookingActions {
     
     public Booking getBookingById(int id) {
         try {
-            String response = HTTPHelper.get(BASE_URL + "/" + id);
+            String response = HTTPHelper.get(getBaseUrl() + BookingsUrl + "/" + id);
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -51,7 +58,7 @@ public class BookingActions {
     
     public Booking addBooking(JSONObject json) {
         try {
-            String response = HTTPHelper.post(BASE_URL + "/new", json.toString());
+            String response = HTTPHelper.post(getBaseUrl() + BookingsUrl + "/new", json.toString());
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -61,7 +68,7 @@ public class BookingActions {
     
     public Booking updateBookingById(int id, JSONObject json) {
         try {
-            String response = HTTPHelper.put(BASE_URL + "/update/" + id, json.toString());
+            String response = HTTPHelper.put(getBaseUrl() + BookingsUrl + "/update/" + id, json.toString());
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -71,7 +78,7 @@ public class BookingActions {
     
     public void deleteBookingById(int id) {
 
-        HTTPHelper.delete(BASE_URL + "/delete/" + id);
+        HTTPHelper.delete(getBaseUrl() + BookingsUrl + "/delete/" + id);
 
     }
 
@@ -84,7 +91,7 @@ public class BookingActions {
                 .build();
 
         Request request = new Request.Builder()
-                .url(BASE_URL)
+                .url(getBaseUrl() + BookingsUrl)
                 .build();
 
         Long startTime = System.currentTimeMillis();

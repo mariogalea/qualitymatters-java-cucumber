@@ -15,12 +15,13 @@ import io.cucumber.java.en.When;
 import io.qualitymatters.bdd.booking.actions.BookingActions;
 import io.qualitymatters.bdd.booking.pojo.Booking;
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
+import io.qualitymatters.bdd.config.Config;
 
 public class BookingStepDefinitions {
 
     private final Context context;
-    
-    BookingActions bookingActions = new BookingActions();
+    Config config = new Config("src/main/resources/config.properties");
+    BookingActions bookingActions = new BookingActions(config);
 
     /*
      * Dependency inject Context class to share Objects between different Steps within the same and different Step Definition files.
