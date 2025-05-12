@@ -59,4 +59,4 @@ Feature: Booking
   Scenario: Measure Booking Response Time
     When the user retrieves booking list
     And the target response time is set to 100 ms
-    Then the user should have that booking list in less than 100 ms
+    Then the user should have that booking list in less than the specified target

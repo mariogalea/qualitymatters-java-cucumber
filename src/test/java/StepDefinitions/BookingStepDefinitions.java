@@ -192,12 +192,13 @@ public class BookingStepDefinitions {
 
     }
 
-    @Then("the user should have that booking list in less than {long} ms")
-    public void the_user_should_have_that_booking_list_in_less_than_ms(long responseTime) throws IOException {
+    @Then("the user should have that booking list in less than the specified target")
+    public void the_user_should_have_that_booking_list_in_less_than_the_specified_target() throws IOException {
 
-        Long responseTimeCaptured = context.get("responseTimeCaptured", Long.class);
+        Long expectedResponseTime = context.get("expectedResponseTime", Long.class);
+        Long actualResponseTime = context.get("actualResponseTime", Long.class);
 
-        Assertions.assertTrue(responseTimeCaptured < responseTime);
+        Assertions.assertTrue(actualResponseTime < expectedResponseTime);
 
     }
     
@@ -225,9 +226,11 @@ public class BookingStepDefinitions {
     @When("the target response time is set to {long} ms")
     public void the_target_response_time_is_set_to_ms(long expectedResponseTime) {
         
-        Long responseTimeCaptured = bookingActions.captureResponseTime(expectedResponseTime);
+        Long actualResponseTime = bookingActions.captureResponseTime(expectedResponseTime);
 
-        context.set("responseTimeCaptured", responseTimeCaptured);  
+
+        context.set("expectedResponseTime", expectedResponseTime);
+        context.set("actualResponseTime", actualResponseTime);  
     }
 
 }
