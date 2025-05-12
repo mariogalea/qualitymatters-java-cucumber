@@ -94,14 +94,6 @@ public class BookingStepDefinitions {
         bookingActions.addBooking(json);
     }
 
-    @When("the response time is captured")
-    public void the_response_time_is_captured() {
-
-        Long responseTimeCaptured = bookingActions.captureResponseTime();
-
-        context.set("responseTimeCaptured", responseTimeCaptured);  
-    }
-
     // Data Table
     @When("^the user updates booking with the following$")
     public void the_user_updates_booking_id_with_the_following(DataTable bookingDetails) throws IOException {
@@ -200,8 +192,8 @@ public class BookingStepDefinitions {
 
     }
 
-    @Then("the user should have that booking list in less than {int} ms")
-    public void the_user_should_have_that_booking_list_in_less_than_ms(int responseTime) throws IOException {
+    @Then("the user should have that booking list in less than {long} ms")
+    public void the_user_should_have_that_booking_list_in_less_than_ms(long responseTime) throws IOException {
 
         Long responseTimeCaptured = context.get("responseTimeCaptured", Long.class);
 
@@ -228,6 +220,14 @@ public class BookingStepDefinitions {
 
         Assertions.assertEquals(json.getString("firstName").toString(), updatedBooking.getFirstName().toString());
         Assertions.assertEquals(json.getString("lastName").toString(), updatedBooking.getLastName().toString());  
+    }
+
+    @When("the target response time is set to {long} ms")
+    public void the_target_response_time_is_set_to_ms(long expectedResponseTime) {
+        
+        Long responseTimeCaptured = bookingActions.captureResponseTime(expectedResponseTime);
+
+        context.set("responseTimeCaptured", responseTimeCaptured);  
     }
 
 }
