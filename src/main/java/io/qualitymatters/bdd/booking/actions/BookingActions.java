@@ -11,7 +11,7 @@ import io.qualitymatters.bdd.booking.pojo.Booking;
 
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 import io.qualitymatters.bdd.config.Config;
-import io.qualitymatters.bdd.utilities.HTTPHelper;
+import io.qualitymatters.bdd.utilities.OkHTTPHelper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,6 +25,7 @@ public class BookingActions {
 
     private final String BookingsUrl = "/bookings";
     private final ObjectMapper mapper = new ObjectMapper();
+    private final OkHTTPHelper httpHelper = new OkHTTPHelper();
 
     Config config;
 
@@ -36,9 +37,17 @@ public class BookingActions {
         return config.getBaseUrl();
     }
 
+    public String getUsername() {
+        return config.getBasicAuthenticationUsername();
+    }
+
+    public String getPassword() {
+        return config.getBasicAuthenticationPassword();
+    }
+
     public NestedBookingPojo getBookings() {
         try {
-            String response = HTTPHelper.get(getBaseUrl() + BookingsUrl);
+            String response = httpHelper.get(getBaseUrl() + BookingsUrl, getUsername(), getPassword());
             return mapper.readValue(response, NestedBookingPojo.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -48,7 +57,7 @@ public class BookingActions {
     
     public Booking getBookingById(int id) {
         try {
-            String response = HTTPHelper.get(getBaseUrl() + BookingsUrl + "/" + id);
+            String response = httpHelper.get(getBaseUrl() + BookingsUrl + "/" + id, getUsername(), getPassword());
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -58,7 +67,7 @@ public class BookingActions {
     
     public Booking addBooking(JSONObject json) {
         try {
-            String response = HTTPHelper.post(getBaseUrl() + BookingsUrl + "/new", json.toString());
+            String response = httpHelper.post(getBaseUrl() + BookingsUrl + "/new", json.toString(), getUsername(), getPassword());
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -68,7 +77,7 @@ public class BookingActions {
     
     public Booking updateBookingById(int id, JSONObject json) {
         try {
-            String response = HTTPHelper.put(getBaseUrl() + BookingsUrl + "/update/" + id, json.toString());
+            String response = httpHelper.put(getBaseUrl() + BookingsUrl + "/update/" + id, json.toString(), getUsername(), getPassword());
             return mapper.readValue(response, Booking.class);
         } catch (IOException e) {
             System.err.println("Error deserializing response: " + e.getMessage());
@@ -78,7 +87,7 @@ public class BookingActions {
     
     public void deleteBookingById(int id) {
 
-        HTTPHelper.delete(getBaseUrl() + BookingsUrl + "/delete/" + id);
+        httpHelper.delete(getBaseUrl() + BookingsUrl + "/delete/" + id, getUsername(), getPassword());
 
     }
 
@@ -90,6 +99,7 @@ public class BookingActions {
                 .writeTimeout(1, TimeUnit.SECONDS)
                 .build();
 
+        
         Request request = new Request.Builder()
                 .url(getBaseUrl() + BookingsUrl)
                 .build();
