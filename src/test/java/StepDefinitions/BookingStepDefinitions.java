@@ -1,5 +1,7 @@
 package StepDefinitions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +18,12 @@ import io.qualitymatters.bdd.booking.actions.BookingActions;
 import io.qualitymatters.bdd.booking.pojo.Booking;
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 import io.qualitymatters.bdd.config.Config;
+import okhttp3.Response;
 
 public class BookingStepDefinitions {
 
     private final Context context;
+    private Response response;
     Config config = new Config("src/main/resources/config.properties");
     BookingActions bookingActions = new BookingActions(config);
 
@@ -231,6 +235,21 @@ public class BookingStepDefinitions {
 
         context.set("expectedResponseTime", expectedResponseTime);
         context.set("actualResponseTime", actualResponseTime);  
+    }
+
+    @When("an Unathenticated user retries booking list")
+    public void an_Unathenticated_user_retries_booking_list() {
+
+        context.set("responseCode", bookingActions.getUnauthorisedBookingsRawResponse());
+        
+    }
+
+    @Then("the user should be blocked with a error {int}")
+    public void the_user_should_be_blocked_with_a_error(int expectedStatusCode) {
+
+        Response response = context.get("responseCode", Response.class);
+        assertEquals(expectedStatusCode, response.code());
+
     }
 
 }

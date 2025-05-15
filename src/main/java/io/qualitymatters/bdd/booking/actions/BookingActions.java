@@ -11,7 +11,8 @@ import io.qualitymatters.bdd.booking.pojo.Booking;
 import io.qualitymatters.bdd.booking.pojo.NestedBookingPojo;
 import io.qualitymatters.bdd.config.Config;
 import io.qualitymatters.bdd.utilities.OkHTTPHelper;
-
+import okhttp3.Request;
+import okhttp3.Response;
 
 import org.json.JSONObject;
 
@@ -51,7 +52,7 @@ public class BookingActions {
             throw new RuntimeException("Failed to deserialize bookings data", e);
         }
     }
-    
+
     public Booking getBookingById(int id) {
         try {
             String response = httpHelper.get(getBaseUrl() + BookingsUrl + "/" + id, getUsername(), getPassword());
@@ -113,6 +114,12 @@ public class BookingActions {
         }
 
         return duration;
+    }
+
+    // No Exception Handling for HTTP Error Codes
+    public Response getUnauthorisedBookingsRawResponse() {
+        String url = getBaseUrl() + BookingsUrl;
+        return httpHelper.getRawResponse(url);
     }
 
 }

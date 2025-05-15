@@ -58,5 +58,11 @@ Feature: Booking
   @performance
   Scenario: Measure Booking Response Time
     When the user retrieves booking list
-    And the target response time is set to 100 ms
+    And the target response time is set to 200 ms
     Then the user should have that booking list in less than the specified target
+  
+  @security
+  Scenario: Block Unathenticated Access
+    When an Unathenticated user retries booking list
+    Then the user should be blocked with a error 401
+

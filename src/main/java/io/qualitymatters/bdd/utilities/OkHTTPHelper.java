@@ -137,6 +137,7 @@ public class OkHTTPHelper implements HTTPHelper {
         }
     }
 
+    
     // Shared executor
     private String executeRequest(Request request, String method, String url) {
         try (Response response = client.newCall(request).execute()) {
@@ -156,4 +157,21 @@ public class OkHTTPHelper implements HTTPHelper {
             throw new RuntimeException("Error during " + method + " request to " + url, e);
         }
     }
+
+    public Response getRawResponse(String url) {
+        Request request = createRequestBuilder(url, null, null, null).build();
+        return executeRequestRaw(request, "GET", url); 
+    }
+
+    private Response executeRequestRaw(Request request, String method, String url) {
+        try {
+            Response response = client.newCall(request).execute();
+            return response; // Let caller handle response code
+        } catch (IOException e) {
+            System.err.println(method + " request failed for " + url + ": " + e.getMessage());
+            throw new RuntimeException("Error during " + method + " request to " + url, e);
+        }
+    }
+
+
 }
