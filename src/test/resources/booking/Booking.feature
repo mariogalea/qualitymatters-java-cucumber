@@ -62,7 +62,7 @@ Feature: Booking
     Then the user should have that booking list in less than the specified target
   
   @security
-  Scenario: Block Unathenticated Access
-    When an Unathenticated user retries booking list
+  Scenario: Block Unauthenticated Access
+    When an Unauthenticated user retries booking list
     Then the user should be blocked with a error 401
 

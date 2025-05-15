@@ -237,7 +237,7 @@ public class BookingStepDefinitions {
         context.set("actualResponseTime", actualResponseTime);  
     }
 
-    @When("an Unathenticated user retries booking list")
+    @When("an Unauthenticated user retries booking list")
     public void an_Unathenticated_user_retries_booking_list() {
 
         context.set("responseCode", bookingActions.getUnauthorisedBookingsRawResponse());
