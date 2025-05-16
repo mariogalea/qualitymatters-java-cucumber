@@ -63,6 +63,6 @@ Feature: Booking
   
   @security
   Scenario: Block Unauthenticated Access
-    When an Unauthenticated user retries booking list
-    Then the user should be blocked with a error 401
+    When an unauthenticated user retrieves booking list
+    Then the user should be blocked with an error 401
 

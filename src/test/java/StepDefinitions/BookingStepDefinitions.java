@@ -237,15 +237,15 @@ public class BookingStepDefinitions {
         context.set("actualResponseTime", actualResponseTime);  
     }
 
-    @When("an Unauthenticated user retries booking list")
-    public void an_Unathenticated_user_retries_booking_list() {
+    @When("an unauthenticated user retrieves booking list")
+    public void an_unathenticated_user_retrieves_booking_list() {
 
         context.set("responseCode", bookingActions.getUnauthorisedBookingsRawResponse());
         
     }
 
-    @Then("the user should be blocked with a error {int}")
-    public void the_user_should_be_blocked_with_a_error(int expectedStatusCode) {
+    @Then("the user should be blocked with an error {int}")
+    public void the_user_should_be_blocked_with_an_error(int expectedStatusCode) {
 
         Response response = context.get("responseCode", Response.class);
         assertEquals(expectedStatusCode, response.code());
